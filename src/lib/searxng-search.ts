@@ -1,7 +1,7 @@
 import type { SearXNGResponse } from "@/types/searxng-api";
 import type { SearchResponse, SearchResult } from "@/types/search";
 
-const DEFAULT_SEARXNG_URL = "https://searx.be/search";
+const DEFAULT_SEARXNG_URL = "https://etsi.me/search";
 
 export const searchSearXNG = async (
   query: string,
