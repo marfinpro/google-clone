@@ -1,5 +1,5 @@
-import type { SearXNGResponse } from "@/types/searxng-api";
 import type { SearchResponse, SearchResult } from "@/types/search";
+import type { SearXNGResponse } from "@/types/searxng-api";
 
 const DEFAULT_SEARXNG_URL = "https://etsi.me/search";
 
