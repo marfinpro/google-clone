@@ -1,5 +1,5 @@
 import { searchGoogle } from "@/lib/google-search";
-import { getMockResults } from "@/lib/mock-data";
+import { searchSearXNG } from "@/lib/searxng-search";
 import type { SearchResponse } from "@/types/search";
 
 export const search = async (
@@ -13,5 +13,5 @@ export const search = async (
     return await searchGoogle(query, page);
   }
 
-  return getMockResults(query, page);
+  return await searchSearXNG(query, page);
 };
