@@ -2,7 +2,8 @@ import Link from "next/link";
 import { GoogleLogo } from "@/components/google-logo";
 import { Pagination } from "@/components/pagination";
 import { SearchResult } from "@/components/search-result";
-import { getMockResults } from "@/lib/mock-data";
+import { search } from "@/lib/search-service";
+import type { SearchResponse } from "@/types/search";
 
 interface SearchPageProps {
   searchParams: Promise<{ q?: string; page?: string }>;
@@ -15,7 +16,18 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const query = params.q ?? "";
   const page = Number(params.page ?? "1");
 
-  const { results, totalResults } = getMockResults(query, page);
+  let results: SearchResponse["results"] = [];
+  let totalResults = 0;
+  let searchTime: number | undefined;
+
+  try {
+    const data = await search(query, page);
+    results = data.results;
+    totalResults = data.totalResults;
+    searchTime = data.searchTime;
+  } catch {
+    // show empty results on error
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-zinc-900">
@@ -82,6 +94,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <>
             <p className="mb-4 text-gray-500 text-sm dark:text-gray-400">
               About {totalResults.toLocaleString()} results
+              {searchTime !== undefined &&
+                ` (${searchTime.toFixed(2)} seconds)`}
             </p>
 
             <div>

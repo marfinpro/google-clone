@@ -10,5 +10,6 @@ export interface SearchResponse {
   page: number;
   query: string;
   results: SearchResult[];
+  searchTime?: number;
   totalResults: number;
 }
