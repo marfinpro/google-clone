@@ -23,10 +23,16 @@ export const SearchResult = ({ result }: SearchResultProps) => {
           </svg>
         </div>
         <div className="flex flex-col">
-          <span className="text-gray-600 text-xs dark:text-gray-400">
+          <span
+            className="max-w-[400px] truncate text-gray-600 text-xs dark:text-gray-400"
+            title={result.displayUrl}
+          >
             {result.displayUrl}
           </span>
-          <span className="text-gray-500 text-xs dark:text-gray-500">
+          <span
+            className="max-w-[400px] truncate text-gray-500 text-xs dark:text-gray-500"
+            title={result.url}
+          >
             {result.url}
           </span>
         </div>
