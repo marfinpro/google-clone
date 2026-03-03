@@ -62,7 +62,7 @@ export const SearchBar = ({
         className={inputClass}
         defaultValue={defaultValue}
         onKeyDown={handleKeyDown}
-        placeholder="Search Google or type a URL"
+        placeholder="Search Findin or type a URL"
         ref={inputRef}
         type="text"
       />

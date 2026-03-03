@@ -15,15 +15,14 @@ export const Pagination = ({
   const visiblePages = Math.min(totalPages, 10);
 
   const logoLetters = [
-    { id: "g1", letter: "G", color: "#4285F4" },
-    { id: "o1", letter: "o", color: "#EA4335" },
-    { id: "o2", letter: "o", color: "#FBBC05" },
-    { id: "o3", letter: "o", color: "#4285F4" },
-    { id: "o4", letter: "o", color: "#34A853" },
-    { id: "o5", letter: "o", color: "#EA4335" },
-    { id: "g2", letter: "g", color: "#4285F4" },
-    { id: "l1", letter: "l", color: "#34A853" },
-    { id: "e1", letter: "e", color: "#EA4335" },
+    { id: "f1", letter: "F", color: "#4285F4" },
+    { id: "i1", letter: "i", color: "#EA4335" },
+    { id: "i2", letter: "i", color: "#FBBC05" },
+    { id: "i3", letter: "i", color: "#4285F4" },
+    { id: "n1", letter: "n", color: "#34A853" },
+    { id: "d1", letter: "d", color: "#EA4335" },
+    { id: "i4", letter: "i", color: "#4285F4" },
+    { id: "n2", letter: "n", color: "#34A853" },
   ];
 
   return (

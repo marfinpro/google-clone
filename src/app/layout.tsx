@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Google",
-  description: "Google Search Clone - Search the web",
+  title: "Findin",
+  description: "Findin Search - Search the web",
 };
 
 export default function RootLayout({
