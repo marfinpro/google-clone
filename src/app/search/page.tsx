@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { GoogleLogo } from "@/components/google-logo";
+import { ImageResultCard } from "@/components/image-result-card";
 import { Pagination } from "@/components/pagination";
 import { SearchResult } from "@/components/search-result";
+import { searchImages } from "@/lib/image-search";
 import { search } from "@/lib/search-service";
-import type { SearchResponse } from "@/types/search";
+import type { ImageSearchResponse, SearchResponse } from "@/types/search";
 
 interface SearchPageProps {
-  searchParams: Promise<{ q?: string; page?: string }>;
+  searchParams: Promise<{ q?: string; page?: string; tab?: string }>;
 }
 
 const NAV_TABS = ["All", "Images", "News", "Videos", "Maps"];
@@ -15,18 +17,28 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
   const query = params.q ?? "";
   const page = Number(params.page ?? "1");
+  const activeTab = params.tab ?? "all";
 
   let results: SearchResponse["results"] = [];
   let totalResults = 0;
   let searchTime: number | undefined;
+  let imageResults: ImageSearchResponse["images"] = [];
 
-  try {
-    const data = await search(query, page);
-    results = data.results;
-    totalResults = data.totalResults;
-    searchTime = data.searchTime;
-  } catch {
-    // show empty results on error
+  if (query) {
+    try {
+      if (activeTab === "images") {
+        const data = await searchImages(query, page);
+        imageResults = data.images;
+        totalResults = data.totalResults;
+      } else {
+        const data = await search(query, page);
+        results = data.results;
+        totalResults = data.totalResults;
+        searchTime = data.searchTime;
+      }
+    } catch {
+      // show empty results on error
+    }
   }
 
   return (
@@ -72,20 +84,24 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           aria-label="Search category tabs"
           className="mt-2 flex gap-6 text-sm"
         >
-          {NAV_TABS.map((tab) => (
-            <a
-              aria-current={tab === "All" ? "page" : undefined}
-              className={`pb-2 ${
-                tab === "All"
-                  ? "border-blue-600 border-b-2 font-medium text-blue-600 dark:border-blue-400 dark:text-blue-400"
-                  : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
-              }`}
-              href={`/search?q=${encodeURIComponent(query)}&tab=${tab.toLowerCase()}`}
-              key={tab}
-            >
-              {tab}
-            </a>
-          ))}
+          {NAV_TABS.map((tab) => {
+            const tabKey = tab.toLowerCase();
+            const isActive = tabKey === activeTab;
+            return (
+              <a
+                aria-current={isActive ? "page" : undefined}
+                className={`pb-2 ${
+                  isActive
+                    ? "border-blue-600 border-b-2 font-medium text-blue-600 dark:border-blue-400 dark:text-blue-400"
+                    : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+                }`}
+                href={`/search?q=${encodeURIComponent(query)}&tab=${tabKey}`}
+                key={tab}
+              >
+                {tab}
+              </a>
+            );
+          })}
         </nav>
       </header>
 
@@ -98,11 +114,19 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 ` (${searchTime.toFixed(2)} seconds)`}
             </p>
 
-            <div>
-              {results.map((result) => (
-                <SearchResult key={result.id} result={result} />
-              ))}
-            </div>
+            {activeTab === "images" ? (
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+                {imageResults.map((image) => (
+                  <ImageResultCard image={image} key={image.id} />
+                ))}
+              </div>
+            ) : (
+              <div>
+                {results.map((result) => (
+                  <SearchResult key={result.id} result={result} />
+                ))}
+              </div>
+            )}
 
             <Pagination
               currentPage={page}

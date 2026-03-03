@@ -17,7 +17,11 @@ export const searchSearXNG = async (
 
   try {
     const response = await fetch(`${baseUrl}?${params.toString()}`, {
-      headers: { Accept: "application/json" },
+      headers: {
+        Accept: "application/json",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+      },
     });
 
     if (!response.ok) {
@@ -45,7 +49,9 @@ export const searchSearXNG = async (
     const totalResults = data.number_of_results ?? results.length;
 
     return { page, query, results, totalResults };
-  } catch {
-    return { page, query, results: [], totalResults: 0 };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+    console.warn(`[SearXNG] Search failed: ${message}`);
+    throw error;
   }
 };
