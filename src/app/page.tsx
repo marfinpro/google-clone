@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
-import { Footer } from "@/components/footer";
 import { FindinLogo } from "@/components/findin-logo";
+import { Footer } from "@/components/footer";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-white dark:bg-zinc-900">
-      <header className="flex justify-end gap-4 p-4">
+      <header className="flex items-center justify-end gap-4 p-4">
         <a
           className="text-gray-700 text-sm hover:underline dark:text-gray-300"
           href="https://mail.google.com"
@@ -43,6 +44,7 @@ export default function Home() {
         >
           Images
         </a>
+        <ThemeToggle />
       </header>
 
       <main className="flex flex-1 flex-col items-center justify-center px-4 pb-32">
@@ -52,13 +54,13 @@ export default function Home() {
 
         <form
           aria-label="Search the web"
-          className="w-full max-w-[584px]"
+          className="w-full max-w-146"
           onSubmit={handleSearch}
         >
           <div className="mb-8 flex w-full items-center rounded-full border border-gray-200 bg-white px-4 py-3 shadow-sm transition-shadow focus-within:border-transparent focus-within:shadow-md hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800">
             <svg
               aria-hidden="true"
-              className="mr-3 h-5 w-5 flex-shrink-0 text-gray-400"
+              className="mr-3 h-5 w-5 shrink-0 text-gray-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

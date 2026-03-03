@@ -3,6 +3,7 @@ import { FindinLogo } from "@/components/findin-logo";
 import { ImageResultCard } from "@/components/image-result-card";
 import { Pagination } from "@/components/pagination";
 import { SearchResult } from "@/components/search-result";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { searchImages } from "@/lib/image-search";
 import { search } from "@/lib/search-service";
 import type { ImageSearchResponse, SearchResponse } from "@/types/search";
@@ -52,12 +53,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <form
             action="/search"
             aria-label="Search the web"
-            className="flex max-w-[584px] flex-1 items-center rounded-full border border-gray-200 bg-white px-3 py-2 transition-shadow focus-within:border-transparent focus-within:shadow-md hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800"
+            className="flex max-w-146 flex-1 items-center rounded-full border border-gray-200 bg-white px-3 py-2 transition-shadow focus-within:border-transparent focus-within:shadow-md hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800"
             method="GET"
           >
             <svg
               aria-hidden="true"
-              className="mr-2 h-4 w-4 flex-shrink-0 text-gray-400"
+              className="mr-2 h-4 w-4 shrink-0 text-gray-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -78,6 +79,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               type="text"
             />
           </form>
+
+          <ThemeToggle />
         </div>
 
         <nav
