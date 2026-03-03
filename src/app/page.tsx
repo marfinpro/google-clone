@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { Footer } from "@/components/footer";
-import { GoogleLogo } from "@/components/google-logo";
+import { FindinLogo } from "@/components/findin-logo";
 
 export default function Home() {
   const router = useRouter();
@@ -47,7 +47,7 @@ export default function Home() {
 
       <main className="flex flex-1 flex-col items-center justify-center px-4 pb-32">
         <div className="mb-8">
-          <GoogleLogo size="large" />
+          <FindinLogo size="large" />
         </div>
 
         <form
@@ -71,10 +71,10 @@ export default function Home() {
               />
             </svg>
             <input
-              aria-label="Search Google"
+              aria-label="Search Findin"
               autoFocus
               className="flex-1 bg-transparent text-base text-gray-900 placeholder-gray-500 outline-none dark:text-white dark:placeholder-gray-400"
-              placeholder="Search Google or type a URL"
+              placeholder="Search Findin or type a URL"
               ref={inputRef}
               type="text"
             />
@@ -85,7 +85,7 @@ export default function Home() {
               className="rounded bg-gray-50 px-4 py-2 text-gray-800 text-sm hover:border hover:border-gray-300 hover:shadow-sm focus:outline-none dark:bg-zinc-700 dark:text-gray-200 dark:hover:border-zinc-500"
               type="submit"
             >
-              Google Search
+              Findin Search
             </button>
             <button
               className="rounded bg-gray-50 px-4 py-2 text-gray-800 text-sm hover:border hover:border-gray-300 hover:shadow-sm focus:outline-none dark:bg-zinc-700 dark:text-gray-200 dark:hover:border-zinc-500"

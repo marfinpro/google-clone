@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GoogleLogo } from "@/components/google-logo";
+import { FindinLogo } from "@/components/findin-logo";
 import { ImageResultCard } from "@/components/image-result-card";
 import { Pagination } from "@/components/pagination";
 import { SearchResult } from "@/components/search-result";
@@ -45,8 +45,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     <div className="flex min-h-screen flex-col bg-white dark:bg-zinc-900">
       <header className="sticky top-0 z-10 border-gray-200 border-b bg-white px-6 py-3 dark:border-zinc-700 dark:bg-zinc-900">
         <div className="flex flex-wrap items-center gap-4">
-          <Link aria-label="Go to Google homepage" href="/">
-            <GoogleLogo size="small" />
+          <Link aria-label="Go to Findin homepage" href="/">
+            <FindinLogo size="small" />
           </Link>
 
           <form
